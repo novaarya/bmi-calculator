@@ -127,7 +127,7 @@
             font-size: 0.9rem;
             font-weight: 700;
             cursor: pointer;
-            /*margin-top: 0.5rem;*/
+           
             transition: background 0.2s, transform 0.2s;
             letter-spacing: 0.5px;
             text-shadow: 0 1px 2px rgba(0,0,0,0.2);
@@ -338,18 +338,18 @@
             const ctx = canvas.getContext('2d');
             ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-    // Gauge parameters
+    
     const cx = canvas.width / 2;
     const cy = canvas.height * 0.9;
     const radius = 90;
     const minBMI = 16;
     const maxBMI = 40;
 
-    // Arc ranges and colors
+    
     const ranges = [18.5, 24.9, 29.9, 40];
     const colors = ['#f39c12', '#27ae60', '#e67e22', '#e74c3c'];
 
-    // Draw colored arcs (upper half, left to right)
+    
     let prev = minBMI;
     for (let i = 0; i < ranges.length; i++) {
         const from = Math.PI - (Math.PI * (prev - minBMI) / (maxBMI - minBMI));
@@ -362,7 +362,7 @@
         prev = ranges[i];
     }
 
-    // Draw tick marks and labels
+    
     
     for (let i = 0; i <= 4; i++) {
         const bmiVal = minBMI + (maxBMI - minBMI) * (i / 4);
@@ -379,7 +379,7 @@
         ctx.fillText(Math.round(bmiVal), cx + (radius + 38) * Math.cos(angle), cy + (radius + 38) * Math.sin(angle));
     }
 
-    // Draw pointer (arrow)
+    
     let pointerBMI = Math.max(minBMI, Math.min(bmi, maxBMI));
     let pointerAngle = Math.PI + ( (pointerBMI - minBMI) / (maxBMI - minBMI) )  *  Math.PI;
     const px = cx + (radius - 10) * Math.cos(pointerAngle);
@@ -392,8 +392,6 @@
     ctx.lineWidth = 6;
     ctx.strokeStyle = '#222';
     ctx.stroke();
-
-    // Draw arrow head
     const headlen = 18;
     const angle = pointerAngle;
     ctx.beginPath();
@@ -410,13 +408,6 @@
     ctx.lineWidth = 4;
    ctx.stroke();
     ctx.restore();
-    
-
-    // Draw BMI value in center
-   /* ctx.font = 'bold 1.7rem Segoe UI';
-    ctx.fillStyle = '#218c74';
-    ctx.textAlign = 'center';
-    ctx.fillText(`BMI = ${bmi.toFixed(1)}`, cx, cy - 40);*/
 }
 document.getElementById('bmiForm').addEventListener('submit', function(e) {
             e.preventDefault();
@@ -469,8 +460,6 @@ document.getElementById('bmiForm').addEventListener('submit', function(e) {
 
             drawBMIGauge(bmi);
         });
-
-       
         drawBMIGauge(16);
     </script>
 
